@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block title %}Conversas - Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Conversas do Chat</h1>
+</div>
+
+<div class="conversations-layout">
+    <div class="conversations-list" id="conversationsList">
+        <div class="conversations-header">
+            <input type="text" id="searchConversations" placeholder="Buscar conversas...">
+        </div>
+        <div class="conversations-items" id="conversationsItems">
+        </div>
+    </div>
+    
+    <div class="conversation-detail" id="conversationDetail">
+        <div class="no-conversation-selected">
+            <i class="fas fa-comments"></i>
+            <p>Selecione uma conversa para visualizar</p>
+        </div>
+        <div class="conversation-content" id="conversationContent" style="display: none;">
+            <div class="conversation-header">
+                <div class="conversation-customer">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="customer-info">
+                        <h3 id="customerName">Cliente</h3>
+                        <span id="customerPhone"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="messages-container" id="messagesContainer">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin/conversas.js') }}"></script>
+{% endblock %}

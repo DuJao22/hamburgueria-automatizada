@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/eventlet/hubs/poll.py", line 111, in wait
+    listener.cb(fileno)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/eventlet/greenthread.py", line 272, in main
+    result = function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/socketio/server.py", line 594, in _handle_event_internal
+    r = server._trigger_event(data[0], namespace, sid, *data[1:])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/socketio/server.py", line 620, in _trigger_event
+    return handler(*args)
+           ^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask_socketio/__init__.py", line 292, in _handler
+    return self._handle_event(handler, message, real_ns, sid,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask_socketio/__init__.py", line 835, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 1928, in handle_message
+    response = process_chat_message(session_id, content, conv_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 2189, in process_chat_message
+    ai_response = process_with_ai(session_id, content, conv_data)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 1018, in process_with_ai
+    return process_without_ai(content_lower, session_id, conv_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 1417, in process_without_ai
+    if len(matching_products) == 1 and not detected_volume:
+                                           ^^^^^^^^^^^^^^^
+NameError: name 'detected_volume' is not defined
+Removing descriptor: 10

@@ -1,0 +1,119 @@
+{% extends "admin/base.html" %}
+{% block title %}Produtos - Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Produtos</h1>
+    <button class="btn btn-primary" id="addProductBtn">
+        <i class="fas fa-plus"></i> Novo Produto
+    </button>
+</div>
+
+<div class="filters-bar">
+    <div class="search-filter">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchProducts" placeholder="Buscar produtos...">
+    </div>
+    <div class="filter-group">
+        <select id="categoryFilter">
+            <option value="">Todas Categorias</option>
+        </select>
+        <select id="statusFilter">
+            <option value="">Todos Status</option>
+            <option value="1">Ativos</option>
+            <option value="0">Inativos</option>
+        </select>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-container">
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="productsTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Novo Produto</h2>
+            <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="productName">Nome *</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Preço *</label>
+                    <input type="number" id="productPrice" step="0.01" min="0" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productDescription">Descrição</label>
+                <textarea id="productDescription" rows="3"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="productCategory">Categoria</label>
+                    <select id="productCategory">
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Estoque</label>
+                    <input type="number" id="productStock" min="0" value="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productImage">URL da Imagem</label>
+                <input type="url" id="productImage" placeholder="https://...">
+            </div>
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="productActive" checked>
+                    Produto ativo
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="categoryModal">
+    <div class="modal-content modal-sm">
+        <div class="modal-header">
+            <h2>Gerenciar Categorias</h2>
+            <button class="modal-close" id="closeCategoryModal">&times;</button>
+        </div>
+        <div class="category-list" id="categoryList">
+        </div>
+        <form id="categoryForm" class="category-form">
+            <input type="text" id="categoryName" placeholder="Nome da categoria" required>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin/produtos.js') }}"></script>
+{% endblock %}

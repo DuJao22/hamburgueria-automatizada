@@ -1,0 +1,32 @@
+HTTP/1.1" 200 2 "https://chatprodashboard.onrender.com/chat" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:42:51 +0000] "GET /socket.io/?EIO=4&transport=polling&t=PhD40Cb&sid=H4Lw4hYYFrvudaRGAAAA HTTP/1.1" 200 1 "https://chatprodashboard.onrender.com/chat" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:19 +0000] "GET / HTTP/1.1" 200 8461 "https://chatprodashboard.onrender.com/chat" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:19 +0000] "GET /static/images/logo-arigua.png HTTP/1.1" 304 0 "https://chatprodashboard.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:19 +0000] "GET /static/js/main.js HTTP/1.1" 304 0 "https://chatprodashboard.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:19 +0000] "GET /static/css/style.css HTTP/1.1" 304 0 "https://chatprodashboard.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+server=chatprodashboard.onrender.com//socket.io/ client=127.0.0.1:51096 socket shutdown error: [Errno 9] Bad file descriptor[2025-11-29 00:43:20,145] ERROR in app: Exception on /api/cart [GET]
+Traceback (most recent call last):
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/render/project/src/app.py", line 350, in manage_cart
+    items = query_db('''
+        SELECT ci.*, p.name, p.price, p.image_url
+    ...<2 lines>...
+        WHERE ci.session_id = ?
+    ''', [session_id])
+  File "/opt/render/project/src/app.py", line 47, in query_db
+    cur = get_db().execute(query, args)
+sqlite3.OperationalError: no such table: cart_items
+127.0.0.1 - - [29/Nov/2025:00:43:20 +0000] "GET /api/cart HTTP/1.1" 500 265 "https://chatprodashboard.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:22 +0000] "GET /chat HTTP/1.1" 200 4771 "https://chatprodashboard.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [29/Nov/2025:00:43:22 +0000] "GET /static/css/chat.css HTTP/1.1" 304 0 "https://

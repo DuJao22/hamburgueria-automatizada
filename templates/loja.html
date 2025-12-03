@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Cardápio - Burger House{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loja.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="loja-container">
+    <header class="loja-header">
+        <div class="header-top">
+            <a href="{{ url_for('index') }}" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo-hamburgueria.png') }}" alt="Burger House" class="logo-img">
+                <span>Burger House</span>
+            </div>
+            <div class="header-actions">
+                <button class="search-toggle" id="searchToggle">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="{{ url_for('meus_pedidos') }}" class="orders-btn" id="ordersBtn" title="Meus Pedidos">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="{{ url_for('carrinho') }}" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </div>
+        </div>
+        <div class="search-bar" id="searchBar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar no cardápio...">
+            <button class="clear-search" id="clearSearch">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="last-orders-card" id="lastOrdersCard" style="display: none;">
+        <div class="orders-card-header">
+            <div class="orders-header-left">
+                <i class="fas fa-box"></i>
+                <div>
+                    <h3>Olá, <span id="customerNameDisplay"></span>!</h3>
+                    <p>Seus últimos pedidos</p>
+                </div>
+            </div>
+            <a href="{{ url_for('meus_pedidos') }}" class="view-all-orders">Ver todos</a>
+        </div>
+        <div class="orders-list" id="ordersList"></div>
+    </div>
+
+    <div class="categories-scroll">
+        <div class="categories-container" id="categoriesContainer">
+            <button class="category-btn active" data-category="">
+                <i class="fas fa-th-large"></i>
+                <span>Todos</span>
+            </button>
+            {% for category in categories %}
+            <button class="category-btn" data-category="{{ category.id }}">
+                <i class="fas fa-tag"></i>
+                <span>{{ category.name }}</span>
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <main class="products-grid" id="productsGrid">
+        {% for product in products %}
+        <div class="product-card" data-id="{{ product.id }}">
+            <div class="product-image">
+                <img src="{{ product.image_url or 'https://via.placeholder.com/300x300?text=Produto' }}" alt="{{ product.name }}" loading="lazy">
+                {% if product.stock <= 5 and product.stock > 0 %}
+                <span class="product-badge warning">Últimas unidades</span>
+                {% elif product.stock == 0 %}
+                <span class="product-badge danger">Esgotado</span>
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <span class="product-category">{{ product.category_name or 'Geral' }}</span>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description[:80] }}{% if product.description|length > 80 %}...{% endif %}</p>
+                <div class="product-footer">
+                    <div class="product-price">
+                        <span class="price">R$ {{ "%.2f"|format(product.price) }}</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-id="{{ product.id }}" {% if product.stock == 0 %}disabled{% endif %}>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+
+    <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>Nenhum produto encontrado</h3>
+        <p>Tente buscar por outro termo</p>
+    </div>
+
+    <div class="floating-buttons">
+        <a href="https://wa.me/5531999999999" class="fab fab-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="fab fab-chat" onclick="window.location.href='{{ url_for('chat') }}'">
+            <i class="fas fa-comments"></i>
+        </button>
+        <button class="fab fab-cart" onclick="window.location.href='{{ url_for('carrinho') }}'">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartBadgeFab">0</span>
+        </button>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Produto adicionado ao carrinho!</span>
+    </div>
+
+    <footer class="loja-footer">
+        <div class="footer-content">
+            Desenvolvido por <span class="developer-name">João Layon</span> - Full Stack Developer
+        </div>
+    </footer>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/loja.js') }}"></script>
+{% endblock %}

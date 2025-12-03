@@ -1,0 +1,504 @@
+{% extends "base.html" %}
+{% block title %}Login - Burger House{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="logo">
+                <img src="/static/images/logo-hamburgueria.png" alt="Burger House" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+            </div>
+            <h1>Entrar</h1>
+            <p>Acesse sua conta para continuar</p>
+        </div>
+
+        <div class="login-tabs">
+            <button class="tab-btn active" data-tab="cliente">
+                <i class="fas fa-user"></i> Cliente
+            </button>
+            <button class="tab-btn" data-tab="admin">
+                <i class="fas fa-shield-alt"></i> Admin
+            </button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form class="login-form" id="clienteForm">
+            <div class="form-group">
+                <label for="phone">Telefone</label>
+                <div class="input-icon">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-sign-in-alt"></i>
+                Entrar
+            </button>
+        </form>
+
+        <form class="login-form" id="adminForm" style="display: none;">
+            <div class="form-group">
+                <label for="username">Usuário</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-sign-in-alt"></i>
+                Entrar
+            </button>
+        </form>
+
+        <div class="login-divider" id="dividerCliente">
+            <span>ou</span>
+        </div>
+
+        <div class="login-alternatives" id="alternativesCliente">
+            <a href="{{ url_for('chat') }}" class="btn btn-secondary btn-block">
+                <i class="fas fa-comments"></i>
+                Entrar pelo Chat
+            </a>
+        </div>
+
+        <div class="login-footer" id="footerCliente">
+            <p>Não tem conta? <a href="{{ url_for('chat') }}">Cadastre-se pelo chat</a></p>
+        </div>
+
+        <div class="login-footer" id="footerAdmin" style="display: none;">
+            <a href="{{ url_for('index') }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Voltar ao site
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 20px;
+}
+
+.login-card {
+    background: #2d2d2d;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid #3d3d3d;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-header .logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-header .logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid #ff8c00;
+}
+
+.login-header .logo-fallback {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6600 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: white;
+}
+
+.login-header h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #888;
+}
+
+.login-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #3d3d3d;
+    background: #1a1a1a;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    border-color: #ff8c00;
+    color: #ff8c00;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6600 100%);
+    border-color: transparent;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i:first-child {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #3d3d3d;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.input-icon input::placeholder {
+    color: #666;
+}
+
+.input-icon input:focus {
+    outline: none;
+    border-color: #ff8c00;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6600 100%);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4);
+}
+
+.btn-secondary {
+    background: #3d3d3d;
+    color: #ff8c00;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #4d4d4d;
+}
+
+.login-divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #3d3d3d;
+}
+
+.login-divider::before { left: 0; }
+.login-divider::after { right: 0; }
+
+.login-divider span {
+    background: #2d2d2d;
+    padding: 0 15px;
+    color: #888;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #888;
+}
+
+.login-footer a {
+    color: #ff8c00;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link {
+    color: #888;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-link:hover {
+    color: #ff8c00;
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+    text-align: center;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const clienteForm = document.getElementById('clienteForm');
+    const adminForm = document.getElementById('adminForm');
+    const dividerCliente = document.getElementById('dividerCliente');
+    const alternativesCliente = document.getElementById('alternativesCliente');
+    const footerCliente = document.getElementById('footerCliente');
+    const footerAdmin = document.getElementById('footerAdmin');
+    const errorMessage = document.getElementById('errorMessage');
+    const phoneInput = document.getElementById('phone');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            errorMessage.style.display = 'none';
+            
+            if (this.dataset.tab === 'cliente') {
+                clienteForm.style.display = 'block';
+                adminForm.style.display = 'none';
+                dividerCliente.style.display = 'block';
+                alternativesCliente.style.display = 'block';
+                footerCliente.style.display = 'block';
+                footerAdmin.style.display = 'none';
+            } else {
+                clienteForm.style.display = 'none';
+                adminForm.style.display = 'block';
+                dividerCliente.style.display = 'none';
+                alternativesCliente.style.display = 'none';
+                footerCliente.style.display = 'none';
+                footerAdmin.style.display = 'block';
+            }
+        });
+    });
+    
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        if (value.length > 6) {
+            value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+        } else if (value.length > 2) {
+            value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        e.target.value = value;
+    });
+    
+    clienteForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const phone = phoneInput.value;
+        const submitBtn = clienteForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        errorMessage.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+        
+        fetch('/api/customer/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ phone: phone })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const savedRedirect = sessionStorage.getItem('redirectAfterLogin');
+                if (savedRedirect) {
+                    sessionStorage.removeItem('redirectAfterLogin');
+                    window.location.href = savedRedirect;
+                } else {
+                    window.location.href = data.redirect;
+                }
+            } else {
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            errorMessage.textContent = 'Erro ao fazer login. Tente novamente.';
+            errorMessage.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    });
+    
+    adminForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const submitBtn = adminForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        errorMessage.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+        
+        fetch('/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            errorMessage.textContent = 'Erro ao fazer login. Tente novamente.';
+            errorMessage.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    });
+});
+
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    }
+}
+</script>
+{% endblock %}

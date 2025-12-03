@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Carrinho - Burger House{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="carrinho-container">
+    <header class="carrinho-header">
+        <a href="{{ url_for('loja') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1>Meu Carrinho</h1>
+        <button class="clear-cart-btn" id="clearCartBtn">
+            <i class="fas fa-trash"></i>
+        </button>
+    </header>
+
+    <main class="carrinho-content">
+        <div class="cart-items" id="cartItems">
+        </div>
+
+        <div class="cart-empty" id="cartEmpty" style="display: none;">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Seu carrinho está vazio</h3>
+            <p>Adicione produtos para continuar</p>
+            <a href="{{ url_for('loja') }}" class="btn btn-primary">
+                <i class="fas fa-utensils"></i> Ver Cardápio
+            </a>
+        </div>
+    </main>
+
+    <footer class="carrinho-footer" id="cartFooter">
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">R$ 0,00</span>
+            </div>
+            <div class="summary-row">
+                <span>Taxa de entrega</span>
+                <span id="shipping">A calcular</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="total">R$ 0,00</span>
+            </div>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">
+            <i class="fas fa-lock"></i>
+            Finalizar Pedido
+        </button>
+        <a href="/login" class="login-btn" id="loginBtn" style="display: none;">
+            <i class="fas fa-sign-in-alt"></i>
+            Fazer Login para Finalizar
+        </a>
+    </footer>
+
+    <a href="https://wa.me/5531999999999" class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Forma de Pagamento</h2>
+            <button class="modal-close" id="closePaymentModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Como você deseja pagar?</p>
+            <div class="payment-options">
+                <button class="payment-option-btn" data-payment="dinheiro">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Dinheiro</span>
+                </button>
+                <button class="payment-option-btn" data-payment="cartao">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Cartão</span>
+                </button>
+                <button class="payment-option-btn" data-payment="pix">
+                    <i class="fas fa-qrcode"></i>
+                    <span>PIX</span>
+                </button>
+            </div>
+
+            <div id="trocoSection" style="display: none;">
+                <h3>Precisa de troco?</h3>
+                <div class="troco-options">
+                    <button class="troco-btn" data-troco="nao">Não preciso de troco</button>
+                    <div class="troco-input-group">
+                        <label>Troco para quanto?</label>
+                        <input type="text" id="trocoInput" placeholder="Ex: R$ 100,00">
+                        <button class="troco-btn" id="confirmarTroco">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/carrinho.js') }}"></script>
+{% endblock %}

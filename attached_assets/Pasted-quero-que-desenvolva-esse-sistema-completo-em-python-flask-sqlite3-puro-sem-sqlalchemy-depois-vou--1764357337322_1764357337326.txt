@@ -1,0 +1,63 @@
+quero que desenvolva esse sistema completo em python flask sqlite3 puro sem sqlalchemy , depois vou colocar ele no sqlitecloud , quero em html5 responsivo para celulares .
+quero ptimizado para rodar no render , quero que de todos os creditos do sistema a joao layon desenvolvedor full stack
+
+chat de cadastro/pedido (WhatsApp), integração com IA Gemini, e-commerce com catálogo, pedido pelo chat ou site, auto-fill de CEP (ou busca por nome de rua), SSO do chat para o site, e persistência completa (clientes, entregas, histórico, carrinhos abandonados, logs). Vou incluir arquitetura, fluxos (sequência), modelo de dados, APIs essenciais, integração com Gemini e considerações de segurança/escala/LGPD.
+
+1 — Visão geral (resumo)
+
+Usuário inicia pelo WhatsApp chat (ou site).
+
+Chat é um assistente inteligente alimentado por Gemini (NLP + decisões).
+
+Cadastro coleta nome, telefone, endereço; pede CEP → tenta auto-completar; se o usuário não souber o CEP, aceita nome de rua + número (faz lookup fuzzy).
+
+Depois do cadastro, o chat pergunta se quer ser redirecionado ao site. Se aceitar, gera um link com login automático (token JWT de curta duração) e redireciona.
+
+Catálogo sincronizado entre site e chat; carrinho é central (user carts persistidos).
+
+Todos os dados (clientes, endereços, pedidos, entregas, carrinhos abandonados, conversas, eventos) são salvos.
+
+Sistema expõe webhooks e APIs para integrações (ERP, transporte, pagamento).
+
+Fluxos principais (sequência passo a passo)
+3.1 Cadastro via chat (WhatsApp)
+
+Usuário envia primeiro contato → Chat connector cria conversation_id.
+
+Chat engine (stateful) pergunta: “Qual seu nome?” → coleta nome.
+
+Pergunta telefone (ou pega do meta do WhatsApp).
+
+Pergunta endereço: pede CEP.
+
+Se usuário fornece CEP: chama CEP API → valida e preenche rua, bairro, cidade, estado.
+
+Se CEP inválido / usuário não sabe: pede “Nome da rua e número” → usa ElasticSearch fuzzy + geocoding para sugerir resultados; pede confirmação.
+
+Cria registro de cliente (Customer service) e endereço (Address table).
+
+Envia mensagem: “Deseja ser direcionado ao site agora? (Sim/Não)”.
+
+Se “Sim”: Auth service gera token JWT one-click (expira em X minutos) e link https://shop.domain/login?token=.... Chat envia link.
+
+Se “Não”: continua assistente no chat.
+
+3.2 Pedido pelo chat
+
+Usuário diz: “Quero X” → Gemini extrai intenção/entidade, chat exibe produto(s) + preço + variante.
+
+Usuário adiciona ao carrinho no backend (Cart service).
+
+Se checkout: calcula frete (Delivery service), aplica cupom, chama gateway de pagamento.
+
+Após pagamento ou confirmação de débito por loja, Order é criado → eventos disparados (ERP, estoque, transporte).
+
+3.3 Pedido pelo site com login do chat
+
+Usuário clica no link com token → Auth service valida token, cria sessão e redireciona ao site com usuário logado.
+
+Carrinho sincronizado: se carrinho existe no Cart service via customer_id, é carregado automaticamente.
+
+3.4 Carrinho abandonado
+
+Evento: cart.inactive (sem updates por N horas) → Notification service envia mensagem via WhatsApp com link para retomar checkout (com token curto).

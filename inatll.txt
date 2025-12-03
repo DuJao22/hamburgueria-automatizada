@@ -1,0 +1,4 @@
+sqlitecloud://cmq6frwshz.g4.sqlite.cloud:8860/burger_house.db?apikey=Dor8OwUECYmrbcS5vWfsdGpjCpdm9ecSDJtywgvRw8k
+
+
+gunicorn --worker-class eventlet -w 1 --bind 0.0.0.0:10000 app:app

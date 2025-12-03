@@ -1,0 +1,185 @@
+{% extends "admin/base.html" %}
+{% block title %}Relatórios - Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Relatórios</h1>
+    <div class="date-range-picker">
+        <input type="date" id="startDate">
+        <span>até</span>
+        <input type="date" id="endDate">
+        <button class="btn btn-primary" id="applyDateRange">Aplicar</button>
+    </div>
+</div>
+
+<div class="report-tabs">
+    <button class="report-tab active" data-report="sales">
+        <i class="fas fa-chart-line"></i> Vendas
+    </button>
+    <button class="report-tab" data-report="customers">
+        <i class="fas fa-users"></i> Clientes
+    </button>
+    <button class="report-tab" data-report="products">
+        <i class="fas fa-box"></i> Produtos
+    </button>
+    <button class="report-tab" data-report="abandoned">
+        <i class="fas fa-shopping-basket"></i> Carrinhos Abandonados
+    </button>
+</div>
+
+<div class="report-content" id="salesReport">
+    <div class="report-summary">
+        <div class="summary-card">
+            <div class="summary-icon blue">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="totalSales">R$ 0,00</span>
+                <span class="summary-label">Receita Total</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon green">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="totalOrdersReport">0</span>
+                <span class="summary-label">Total de Pedidos</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon purple">
+                <i class="fas fa-receipt"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="avgTicket">R$ 0,00</span>
+                <span class="summary-label">Ticket Médio</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="charts-row">
+        <div class="chart-card large">
+            <div class="chart-header">
+                <h3>Vendas por Dia</h3>
+            </div>
+            <div class="chart-container">
+                <canvas id="dailySalesChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3>Vendas por Categoria</h3>
+            </div>
+            <div class="chart-container">
+                <canvas id="categorySalesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="report-content" id="customersReport" style="display: none;">
+    <div class="report-summary">
+        <div class="summary-card">
+            <div class="summary-icon blue">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="newCustomers">0</span>
+                <span class="summary-label">Novos Clientes</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="charts-row">
+        <div class="chart-card large">
+            <div class="chart-header">
+                <h3>Novos Clientes por Dia</h3>
+            </div>
+            <div class="chart-container">
+                <canvas id="newCustomersChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-card">
+        <div class="table-header">
+            <h3>Top Clientes</h3>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Pedidos</th>
+                        <th>Total Gasto</th>
+                    </tr>
+                </thead>
+                <tbody id="topCustomersTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="report-content" id="productsReport" style="display: none;">
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Top 10 Produtos Mais Vendidos</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="topProductsReportChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="report-content" id="abandonedReport" style="display: none;">
+    <div class="report-summary">
+        <div class="summary-card">
+            <div class="summary-icon red">
+                <i class="fas fa-shopping-basket"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="abandonedCount">0</span>
+                <span class="summary-label">Carrinhos Abandonados</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon orange">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="summary-info">
+                <span class="summary-value" id="abandonedValue">R$ 0,00</span>
+                <span class="summary-label">Valor Potencial Perdido</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-card">
+        <div class="table-header">
+            <h3>Carrinhos Abandonados</h3>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Itens</th>
+                        <th>Valor</th>
+                        <th>Última Atividade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="abandonedCartsTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/admin/relatorios.js') }}"></script>
+{% endblock %}

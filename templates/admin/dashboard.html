@@ -1,0 +1,175 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard - Admin{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <div class="date-filter">
+        <button class="filter-btn active" data-period="today">Hoje</button>
+        <button class="filter-btn" data-period="week">Semana</button>
+        <button class="filter-btn" data-period="month">Mês</button>
+        <button class="filter-btn" data-period="year">Ano</button>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="new-orders-card">
+        <div class="new-orders-header">
+            <h3><i class="fas fa-bell"></i> Novos Pedidos</h3>
+            <button class="refresh-btn" onclick="loadNewOrders()">
+                <i class="fas fa-sync-alt"></i> Atualizar
+            </button>
+        </div>
+        <div class="new-orders-list" id="newOrdersList">
+            <div style="text-align: center; padding: 20px; opacity: 0.8;">
+                <i class="fas fa-inbox" style="font-size: 30px; margin-bottom: 10px;"></i>
+                <p>Nenhum pedido novo no momento</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="totalOrders">0</span>
+            <span class="stat-label">Total de Pedidos</span>
+        </div>
+        <div class="stat-trend up">
+            <i class="fas fa-arrow-up"></i> <span id="ordersTrend">0%</span>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="totalRevenue">R$ 0</span>
+            <span class="stat-label">Receita Total</span>
+        </div>
+        <div class="stat-trend up">
+            <i class="fas fa-arrow-up"></i> <span id="revenueTrend">0%</span>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="totalCustomers">0</span>
+            <span class="stat-label">Clientes</span>
+        </div>
+        <div class="stat-trend up">
+            <i class="fas fa-arrow-up"></i> <span id="customersTrend">0%</span>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="pendingOrders">0</span>
+            <span class="stat-label">Pedidos Pendentes</span>
+        </div>
+        <div class="stat-badge warning" id="pendingBadge">Atenção</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon red">
+            <i class="fas fa-shopping-basket"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="abandonedCarts">0</span>
+            <span class="stat-label">Carrinhos Abandonados</span>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon teal">
+            <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-value" id="totalProducts">0</span>
+            <span class="stat-label">Produtos Ativos</span>
+        </div>
+    </div>
+</div>
+
+<div class="charts-grid">
+    <div class="chart-card large">
+        <div class="chart-header">
+            <h3>Vendas por Período</h3>
+            <div class="chart-actions">
+                <select id="salesChartPeriod">
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30" selected>Últimos 30 dias</option>
+                    <option value="90">Últimos 90 dias</option>
+                </select>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Status dos Pedidos</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="ordersStatusChart"></canvas>
+        </div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Top Produtos</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="topProductsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="tables-grid">
+    <div class="table-card">
+        <div class="table-header">
+            <h3>Pedidos Recentes</h3>
+            <a href="{{ url_for('admin_pedidos') }}" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody id="recentOrdersTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="table-card">
+        <div class="table-header">
+            <h3>Atividade do Chat</h3>
+            <a href="{{ url_for('admin_conversas') }}" class="view-all">Ver todas <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="activity-list" id="chatActivityList">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+{% endblock %}

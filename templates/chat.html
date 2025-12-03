@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Chat - Burger House</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo-hamburgueria.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <div class="header-left">
+                <a href="{{ url_for('index') }}" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="avatar">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                <div class="header-info">
+                    <h1>Burger House</h1>
+                    <span class="status">
+                        <span class="status-dot"></span>
+                        Online
+                    </span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="menuBtn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="header-menu" id="headerMenu">
+            <a href="{{ url_for('loja') }}" class="menu-item">
+                <i class="fas fa-utensils"></i> Ver Cardápio
+            </a>
+            <a href="{{ url_for('carrinho') }}" class="menu-item">
+                <i class="fas fa-shopping-cart"></i> Meu Carrinho
+            </a>
+            <div class="menu-divider"></div>
+            <a href="#" class="menu-item" id="clearChatBtn">
+                <i class="fas fa-trash"></i> Limpar Chat
+            </a>
+        </div>
+
+        <main class="chat-messages" id="chatMessages">
+            <div class="chat-date">
+                <span>Hoje</span>
+            </div>
+        </main>
+
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+
+        <div class="quick-actions" id="quickActions">
+            <button class="quick-action-btn" data-message="Ver cardápio">
+                <i class="fas fa-hamburger"></i> Cardápio
+            </button>
+            <button class="quick-action-btn" data-message="Quero fazer um pedido">
+                <i class="fas fa-shopping-cart"></i> Pedir
+            </button>
+            <button class="quick-action-btn" data-message="Horário de funcionamento">
+                <i class="fas fa-clock"></i> Horário
+            </button>
+            <button class="quick-action-btn" data-message="Preciso de ajuda">
+                <i class="fas fa-question-circle"></i> Ajuda
+            </button>
+        </div>
+
+        <footer class="chat-input-container">
+            <div class="input-wrapper">
+                <button class="emoji-btn" id="emojiBtn">
+                    <i class="fas fa-smile"></i>
+                </button>
+                <input type="text" id="messageInput" placeholder="Digite uma mensagem..." autocomplete="off">
+                <button class="attach-btn" id="attachBtn">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+            </div>
+            <button class="send-btn" id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </footer>
+
+        <div class="floating-buttons">
+            <button class="fab fab-store" onclick="window.location.href='{{ url_for('loja') }}'">
+                <i class="fas fa-utensils"></i>
+            </button>
+            <button class="fab fab-cart" onclick="window.location.href='{{ url_for('carrinho') }}'">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+er House
+Online
+
+Hoje
+Oi! Tudo bem? 😊
+
+Eu sou a Ana, da Burger House!
+
+Pra eu te atender melhor, qual é o seu nome?
+ola
+Legal! Mas preciso do seu nome completo, tipo: Maria Santos
+lucas amaral
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+31999196170
+Não encontrei esse telefone cadastrado ainda.
+
+Vamos fazer seu cadastro rapidinho! Qual é o seu nome completo?
+lucas amaral
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+3199196170
+Não encontrei esse telefone cadastrado ainda.
+
+Vamos fazer seu cadastro rapidinho! Qual é o seu nome completo?
+lucas amaral
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+3199196170
+Não encontrei esse telefone cadastrado ainda.
+
+Vamos fazer seu cadastro rapidinho! Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+351
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone não parece certo!
+
+Digite seu número com o código da cidade (DDD).
+
+Exemplo: 31 99999-9999
+3199196170
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+321
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+31999196170
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+321
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+31971280512
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+321
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+31999196170
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+31
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+3199196170
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+32280540
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+321
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+casa
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+ola
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+ola
+15:18
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+15:18
+ola
+15:18
+😅 Esse telefone está incompleto!
+
+Digite seu número com DDD (pelo menos 10 dígitos).
+
+Exemplo: 31999999999
+15:18
+31999196170
+15:18
+Ótimo! Agora preciso do seu endereço.
+
+Qual é o seu CEP?
+15:18
+323280540
+15:18
+😅 Esse CEP não está certo!
+
+Digite 8 números, sem traço.
+
+Exemplo: 30130000
+15:18
+32280540
+15:18
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+15:18
+321
+15:18
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+15:18
+casa
+15:18
+Opa! Pra finalizar seu pedido, preciso confirmar seus dados.
+
+Pode me passar seu telefone com DDD?
+15:18
+31999196170
+15:19
+Não encontrei esse telefone cadastrado ainda.
+
+Vamos fazer seu cadastro rapidinho! Qual é o seu CEP?
+15:19
+32280540
+15:19
+✅ Achei o endereço!
+
+📍 Rua Rio Reno
+Parque Riacho das Pedras 2ª Seção - Contagem/MG
+
+Qual é o número da sua casa/apartamento?
+15:19
+231
+15:19
+Agora o complemento (apartamento, bloco, casa, etc.)
+
+💡 Se não tiver complemento, basta digitar NÃO
+15:19
+nao
+15:19
+Quase lá! Me diz seu nome completo?

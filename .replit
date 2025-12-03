@@ -1,0 +1,57 @@
+modules = ["python-3.11", "web", "nodejs-20", "postgresql-16"]
+[agent]
+expertMode = true
+integrations = ["python_gemini:1.0.0"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["iana-etc", "openssl", "postgresql", "sqlite"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "gunicorn --worker-class eventlet -w 1 --bind 0.0.0.0:5000 --reuse-port --reload main:app"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 40223
+externalPort = 3000
+
+[[ports]]
+localPort = 45725
+externalPort = 3002
+
+[[ports]]
+localPort = 46091
+externalPort = 3003
+
+[userenv]
+
+[userenv.shared]
+SQLITECLOUD_URL = "sqlitecloud://cmq6frwshz.g4.sqlite.cloud:8860/burger_house.db?apikey=Dor8OwUECYmrbcS5vWfsdGpjCpdm9ecSDJtywgvRw8k"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]

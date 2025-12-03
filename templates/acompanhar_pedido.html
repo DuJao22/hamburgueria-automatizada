@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+{% block title %}Acompanhar Pedido - Ariguá Distribuidora{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/acompanhar_pedido.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="track-page">
+    <header class="track-header">
+        <div class="header-content">
+            <a href="{{ url_for('index') }}" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1>Acompanhar Pedido</h1>
+                <p class="subtitle">Veja o status do seu pedido em tempo real</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="track-container">
+        <div class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input 
+                    type="number" 
+                    id="orderIdInput" 
+                    placeholder="Digite o número do pedido"
+                    min="1"
+                >
+                <button id="searchBtn" class="search-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <p class="search-hint">
+                <i class="fas fa-info-circle"></i>
+                Digite o número do pedido para acompanhar o status
+            </p>
+        </div>
+
+        <div id="orderTrackingResult" class="tracking-result" style="display: none;">
+            <!-- Resultado será inserido aqui -->
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <p id="errorText"></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/acompanhar_pedido.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+An exception was thrown while monkey_patching for eventlet. to fix this error make sure you run eventlet.monkey_patch() before importing any other modules.
+Traceback (most recent call last):
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 633, in _upgrade_instances
+    new = upgrade_or_traverse(v)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 610, in upgrade_or_traverse
+    _upgrade_instances(obj, klass, upgrade, visited, old_to_new)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 624, in _upgrade_instances
+    container_vars = vars(container)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/werkzeug/local.py", line 318, in _get_
+    obj = instance._get_current_object()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/werkzeug/local.py", line 519, in _get_current_object
+    raise RuntimeError(unbound_message) from None
+RuntimeError: Working outside of request context.
+This typically means that you attempted to use functionality that needed
+an active HTTP request. Consult the documentation on testing for
+information about how to avoid this problem.
+An exception was thrown while monkey_patching for eventlet. to fix this error make sure you run eventlet.monkey_patch() before importing any other modules.
+Traceback (most recent call last):
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 633, in _upgrade_instances
+    new = upgrade_or_traverse(v)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 610, in upgrade_or_traverse
+    _upgrade_instances(obj, klass, upgrade, visited, old_to_new)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/eventlet/patcher.py", line 624, in _upgrade_instances
+    container_vars = vars(container)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/werkzeug/local.py", line 318, in _get_
+    obj = instance._get_current_object()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/werkzeug/local.py", line 519, in _get_current_object
+    raise RuntimeError(unbound_message) from None
+RuntimeError: Working outside of application context.
+This typically

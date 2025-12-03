@@ -1,0 +1,101 @@
+
+{% extends "base.html" %}
+{% block title %}Meus Pedidos - Ariguá Distribuidora{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/meus_pedidos.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="orders-page">
+    <header class="orders-header">
+        <div class="header-content">
+            <a href="{{ url_for('index') }}" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1>Meus Pedidos</h1>
+                <p class="customer-name" id="customerName"></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="orders-container">
+        <div class="filters-section">
+            <button class="filter-btn active" data-status="all">
+                Todos
+            </button>
+            <button class="filter-btn" data-status="pending">
+                Pendentes
+            </button>
+            <button class="filter-btn" data-status="delivered">
+                Entregues
+            </button>
+            <button class="filter-btn" data-status="cancelled">
+                Cancelados
+            </button>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Carregando pedidos...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes do Pedido #<span id="modalOrderNumber"></span></h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-status-badge" id="modalOrderStatus"></div>
+                
+                <div class="order-section">
+                    <h3><i class="fas fa-box"></i> Itens do Pedido</h3>
+                    <div class="order-items" id="modalOrderItems"></div>
+                </div>
+
+                <div class="order-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</h3>
+                    <p id="modalOrderAddress"></p>
+                </div>
+
+                <div class="order-section">
+                    <h3><i class="fas fa-credit-card"></i> Pagamento</h3>
+                    <p id="modalOrderPayment"></p>
+                </div>
+
+                <div class="order-section">
+                    <h3><i class="fas fa-receipt"></i> Resumo</h3>
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="modalSubtotal"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Frete:</span>
+                            <span id="modalShipping"></span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="modalTotal"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-section">
+                    <h3><i class="fas fa-clock"></i> Data do Pedido</h3>
+                    <p id="modalOrderDate"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/meus_pedidos.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "admin/base.html" %}
+{% block title %}Pedidos - Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Pedidos</h1>
+    <div class="header-stats">
+        <div class="stat-mini pending">
+            <span id="pendingCount">0</span> Pendentes
+        </div>
+        <div class="stat-mini processing">
+            <span id="processingCount">0</span> Em Preparo
+        </div>
+        <div class="stat-mini shipped">
+            <span id="shippedCount">0</span> Enviados
+        </div>
+    </div>
+</div>
+
+<div class="status-tabs">
+    <button class="status-tab active" data-status="">Todos</button>
+    <button class="status-tab" data-status="pending">Pendentes</button>
+    <button class="status-tab" data-status="confirmed">Confirmados</button>
+    <button class="status-tab" data-status="processing">Em Preparo</button>
+    <button class="status-tab" data-status="shipped">Enviados</button>
+    <button class="status-tab" data-status="delivered">Entregues</button>
+    <button class="status-tab" data-status="cancelled">Cancelados</button>
+</div>
+
+<div class="table-card">
+    <div class="table-container">
+        <table id="ordersTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Itens</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="orderModal">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h2>
+                <i class="fas fa-shopping-bag"></i>
+                Pedido #<span id="orderNumber"></span>
+            </h2>
+            <button class="modal-close" id="closeOrderModal">&times;</button>
+        </div>
+        <div class="order-details">
+            <div class="order-section">
+                <h3>
+                    <i class="fas fa-user"></i>
+                    Informações do Cliente
+                </h3>
+                <div class="customer-info" id="customerInfo">
+                </div>
+            </div>
+            
+            <div class="order-section">
+                <h3>
+                    <i class="fas fa-box"></i>
+                    Itens do Pedido
+                </h3>
+                <table class="order-items-table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Qtd</th>
+                            <th>Preço Unit.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderItemsBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="order-section">
+                <h3>
+                    <i class="fas fa-receipt"></i>
+                    Resumo do Pedido
+                </h3>
+                <div class="order-summary" id="orderSummary">
+                </div>
+            </div>
+            
+            <div class="order-section">
+                <h3>
+                    <i class="fas fa-sync-alt"></i>
+                    Atualizar Status
+                </h3>
+                <div class="status-update">
+                    <select id="newStatus">
+                        <option value="pending">⏳ Pendente</option>
+                        <option value="confirmed">✅ Confirmado</option>
+                        <option value="processing">👨‍🍳 Em Preparo</option>
+                        <option value="shipped">🚚 Enviado</option>
+                        <option value="delivered">✅ Entregue</option>
+                        <option value="cancelled">❌ Cancelado</option>
+                    </select>
+                    <input type="text" id="statusNotes" placeholder="Observações sobre o status (opcional)">
+                    <button class="btn btn-primary" id="updateStatusBtn">
+                        <i class="fas fa-check"></i>
+                        Atualizar Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin/pedidos.js') }}"></script>
+{% endblock %}
